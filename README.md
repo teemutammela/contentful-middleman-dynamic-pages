@@ -32,6 +32,7 @@ __Teemu Tammela__
 * [Ruby](https://www.ruby-lang.org/en/) (3.0.2)
 * [RVM](https://rvm.io/)
 * [Bundler](https://bundler.io/)
+* [Git](https://git-scm.com/) (optional)
 * [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/) or [Bitbucket](https://bitbucket.org/) account (optional)
 * [Netlify](https://www.netlify.com/) account (optional)
 
@@ -254,4 +255,4 @@ __3)__ Log into [Netflify](https://www.netlify.com/). Sign up to a new account i
 
 __4)__ Select _New site from Git_ under _Sites_ on the Netlify dashboard. Select your preferred Git service provider under _Continuous Development_ and insert your credentials.
 
-__SECTION UNDER CONSTRUCTION__
+__5)__ Set `middleman build` and the _Build command_ and `build/` as the _Publish directory_ unless Netlify fails to autodetect them. You can configure Netlify to use any branch in your repository as the build source. By default, Netlify launches a new build whenever new commits are pushed to the `master` branch. 
