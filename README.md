@@ -42,16 +42,10 @@ $ contentful login
 $ contentful space use
 ```
 
-__2)__ Import content model `Page` to target space.
+__2)__ Import content model `Page` and example entries to target space.
 
 ```shell
-$ contentful space import --content-file setup/page_model.json
-```
-
-__3)__ Import example entries to target space.
-
-```shell
-$ contentful space import --content-file setup/example_pages.json
+$ contentful space import --content-file setup/example_content.json
 ```
 
 ## Ruby & RVM Setup
