@@ -2,7 +2,7 @@
 
 This tutorial describes how to create dynamic pages with the [Contentful](https://www.contentful.com/) content management platform and the [Middleman](https://middlemanapp.com/) static site generator. Prior methods of combining Contentful and Middleman, such as the [contentful_middleman](https://github.com/contentful/contentful_middleman) gem, involved exporting Contentful entries as a JSON file. The dynamic page approach, however, queries content in real time via the Contentful Delivery API without the need for exporting files. In addition, this tutorial also describes how to deploy the application to [Netlify](https://www.netlify.com/). This tutorial is written with Unix-like operating systems such as macOS or Linux in mind.
 
-__NOTE!__ The source code found in this repository is the __end result__ of this tutorial. Both cloning the repository and carrying out the tutorial is not necessary.
+__NOTE!__ The source code found in this repository is the __end result__ of this tutorial. Both cloning the repository _and_ carrying out the tutorial is not necessary.
 
 This source code is distributed under [Unlicense](https://unlicense.org/) and comes with __absolutely no warranty__. The author assumes no responsibility of data loss or any other unintended side-effects.
 
@@ -83,7 +83,7 @@ __2)__ Set up default Middleman installation.
 $ middleman init
 ```
 
-__3)__ Modify the `Gemfile` by adding the Ruby version and by adding the [Contentful Delivery API client](https://github.com/contentful/contentful.rb) gem `contentful`. Using exact gem version numbers is not absolutely necessary, simply a precaution to ensure this tutorial works as intended.
+__3)__ Modify the `Gemfile` by adding the Ruby version as well as the `contentful` and `rich_text_renderer` gems. Using exact gem version numbers is not absolutely necessary, simply a precaution to ensure this tutorial works as intended.
 
 ```
 source "https://rubygems.org"
@@ -93,6 +93,7 @@ ruby "3.0.2"
 gem "middleman", "4.4.0"
 gem "middleman-autoprefixer", "3.0.0"
 gem "contentful", "2.16.1"
+gem "rich_text_renderer", "0.2.2"
 gem "tzinfo-data", platforms: [:mswin, :mingw, :jruby, :x64_mingw]
 gem "wdm", "~> 0.1", platforms: [:mswin, :mingw, :x64_mingw]
 ```
