@@ -191,7 +191,7 @@ title: Example Page
 <p><%= rich_text_to_html(page.fields[:body]) %></p>
 ```
 
-__3)__ Add the following code block to `config.rb`. Query the `Slug` field of every `Page` entry, map the `Slug` field values into a flat array, query the corresponding `Page` entry and set a proxy. See Middleman's documentation for [dynamic pages](https://middlemanapp.com/advanced/dynamic-pages/) for more details about proxies.
+__3)__ Add the following code block to `config.rb`. Query the `Slug` field of every `Page` entry, map the `Slug` field values into a flat array, query the corresponding `Page` entry and set a proxy. See Middleman's [dynamic pages](https://middlemanapp.com/advanced/dynamic-pages/) documentation for more details about proxies.
 
 ```ruby
 # Query entries that match the content type 'Page'.
@@ -255,6 +255,6 @@ __3)__ Log into [Netflify](https://www.netlify.com/). Sign up to a new account i
 
 __4)__ Select _New site from Git_ under _Sites_ on the Netlify dashboard. Select your preferred Git service provider under _Continuous Development_ and insert your credentials.
 
-__5)__ Set `middleman build` and the _Build command_ and `build/` as the _Publish directory_ unless Netlify fails to autodetect them. You can configure Netlify to use any branch in your repository as the build source. By default, Netlify launches a new build whenever new commits are pushed to the `master` branch.
+__5)__ Set `middleman build` as the _Build command_ and `build/` as the _Publish directory_. You can configure Netlify to use any branch in your repository as the build source. By default, Netlify launches a new build whenever new commits are pushed to the `master` branch.
 
 __6)__ Set Contentful Delivery API key and Space ID as environmental variables `CONTENTFUL_DELIVERY_API_KEY` and `CONTENTFUL_SPACE_ID` at _Site settings_ → _Build & deploy_ → _Environment_ → _Edit variables_.
