@@ -32,6 +32,8 @@ __Teemu Tammela__
 * [Ruby](https://www.ruby-lang.org/en/) (3.0.2)
 * [RVM](https://rvm.io/)
 * [Bundler](https://bundler.io/)
+* [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/) or [Bitbucket](https://bitbucket.org/) account (optional)
+* [Netlify](https://www.netlify.com/) account (optional)
 
 ## Import Example Content
 
@@ -245,5 +247,11 @@ __1)__ Create a `.ruby-version` file.
 ```shell
 $ echo "ruby-3.0.2" > .ruby-version
 ```
+
+__2)__ Push your Middleman app into a [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/) or [Bitbucket](https://bitbucket.org/) repository.
+
+__3)__ Log into [Netflify](https://www.netlify.com/). Sign up to a new account if you don't already have one.
+
+__4)__ Select _New site from Git_ under _Sites_ on the Netlify dashboard. Select your preferred Git service provider under _Continuous Development_ and insert your credentials.
 
 __SECTION UNDER CONSTRUCTION__
