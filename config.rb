@@ -1,5 +1,7 @@
 require "contentful"
 require "rich_text_renderer"
+require "redcarpet"
+require "redcarpet/render_strip"
 
 # Initialize Contentful Delivery API client.
 client = Contentful::Client.new(
@@ -11,8 +13,24 @@ helpers do
 
   # Custom helper for converting Rich Text to HTML
   def rich_text_to_html(value)
+
     renderer = RichTextRenderer::Renderer.new
     renderer.render(value)
+
+  end
+
+  # Custom helper for convert Markdown to HTML
+  def markdown_to_html(value)
+
+    renderer = Redcarpet::Markdown.new(
+    	Redcarpet::Render::HTML,
+    	autolink:     false,
+    	tables:       true,
+    	escape_html:  false
+    )
+
+    renderer.render(value)
+
   end
 
 end

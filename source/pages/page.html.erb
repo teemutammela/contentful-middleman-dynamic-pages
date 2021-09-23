@@ -5,6 +5,6 @@ title: Example Page
 
 <p><%= page.sys[:updated_at] %></p>
 
-<p><%= page.fields[:lead] %></p>
+<p><%= markdown_to_html(page.fields[:lead]) %></p>
 
 <p><%= rich_text_to_html(page.fields[:body]) %></p>

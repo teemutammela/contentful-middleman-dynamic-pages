@@ -80,9 +80,11 @@ __1)__ Install the [Middleman](https://middlemanapp.com/) gem.
 $ gem install middleman
 ```
 
-__2)__ Set up default Middleman installation.
+__2)__ Create a project directory and set up default Middleman installation.
 
 ```shell
+$ mkdir my_project_dir
+$ cd my_project_dir/
 $ middleman init
 ```
 
@@ -97,6 +99,7 @@ gem "middleman", "4.4.0"
 gem "middleman-autoprefixer", "3.0.0"
 gem "contentful", "2.16.1"
 gem "rich_text_renderer", "0.2.2"
+gem "redcarpet", "3.5.1"
 gem "tzinfo-data", platforms: [:mswin, :mingw, :jruby, :x64_mingw]
 gem "wdm", "~> 0.1", platforms: [:mswin, :mingw, :x64_mingw]
 ```
@@ -138,11 +141,13 @@ CONTENTFUL_DELIVERY_API_KEY=xyz123
 CONTENTFUL_SPACE_ID=xyz123
 ```
 
-__3)__ Add Contentful Delivery API client and Rich Text renderer gems to `config.rb`.
+__3)__ Add Contentful Delivery API client, Rich Text renderer and [Redcarpet](https://github.com/vmg/redcarpet) gems to `config.rb`. Redcarpet is a library for converting Markdown into HTML.
 
 ```ruby
 require "contentful"
 require "rich_text_renderer"
+require "redcarpet"
+require "redcarpet/render_strip"
 ```
 
 __4)__ Add the Contentful Delivery API client to `config.rb`. Delivery API key and Space ID will be loaded from `.env` file.
@@ -154,14 +159,31 @@ client = Contentful::Client.new(
 )
 ```
 
-__5)__ Add a custom helper to `config.rb` for converting Rich Text to HTML. This example uses the library's default settings. See Rich Text renderer [documentation](https://github.com/contentful/rich-text-renderer.rb) for more details how to create custom renderers for various embedded entry types.
+__5)__ Add a custom helpers to `config.rb`. These helpers are used for converting Rich Text and Markdown into HTML. This example uses the Rich Text renderer library's default settings. See Rich Text renderer [documentation](https://github.com/contentful/rich-text-renderer.rb) for more details how to create custom renderers for various embedded entry types, or see Redcarpet's [documentation](https://github.com/vmg/redcarpet) for more details about rendering options.
 
 ```ruby
 helpers do
 
+  # Custom helper for converting Rich Text to HTML
   def rich_text_to_html(value)
+
     renderer = RichTextRenderer::Renderer.new
     renderer.render(value)
+
+  end
+
+  # Custom helper for convert Markdown to HTML
+  def markdown_to_html(value)
+
+    renderer = Redcarpet::Markdown.new(
+    	Redcarpet::Render::HTML,
+    	autolink:     false,
+    	tables:       true,
+    	escape_html:  false
+    )
+
+    renderer.render(value)
+
   end
 
 end
@@ -176,7 +198,7 @@ $ mkdir source/pages
 $ touch source/pages/page.html.erb
 ```
 
-__2)__ Insert the following lines of code to `source/pages/page.html.erb`. Notice how we are displaying values from both the `fields` and `sys` properties of the entry. On the last line we are using our custom helper to convert Rich Text into HTML.
+__2)__ Insert the following lines of code to `source/pages/page.html.erb`. Notice how we are displaying values from both the `fields` and `sys` properties of the entry. On the last two lines we are using our custom helpers to convert Markdown and Rich Text into HTML.
 
 ```html
 ---
@@ -186,7 +208,7 @@ title: Example Page
 
 <p><%= page.sys[:updated_at] %></p>
 
-<p><%= page.fields[:lead] %></p>
+<p><%= markdown_to_html(page.fields[:lead]) %></p>
 
 <p><%= rich_text_to_html(page.fields[:body]) %></p>
 ```
