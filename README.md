@@ -1,10 +1,12 @@
 # Dynamic Pages with Contentful and Middleman
 
-This tutorial describes how to create dynamic pages with the [Contentful](https://www.contentful.com/) content management platform and the [Middleman](https://middlemanapp.com/) static site generator. Prior methods of combining Contentful and Middleman, such as the [contentful_middleman](https://github.com/contentful/contentful_middleman) gem, involved exporting Contentful entries as a JSON file. The dynamic page approach, however, queries content in real time via the Contentful Delivery API without the need for exporting files. In addition, this tutorial also describes how to deploy the application to [Netlify](https://www.netlify.com/). This tutorial is written with Unix-like operating systems such as macOS or Linux in mind.
+This tutorial describes how to create dynamic pages with the [Contentful](https://www.contentful.com/) content management platform and the [Middleman](https://middlemanapp.com/) static site generator. Prior methods of combining Contentful and Middleman, such as the [contentful_middleman](https://github.com/contentful/contentful_middleman) gem, involved exporting Contentful entries as a JSON file. The dynamic page approach, however, streamlines the development by querying content in real time via the Contentful Delivery API without the need for exporting files.
+
+In addition, this tutorial describes how to deploy the application to [Netlify](https://www.netlify.com/) and how to setup a Contentful webhook to rebuild the site whenever entries are published. This tutorial is written with Unix-like operating systems such as macOS or Linux in mind.
 
 __NOTE!__ The source code found in this repository is the __end result__ of this tutorial. Both cloning the repository _and_ carrying out the tutorial is not necessary.
 
-This source code is distributed under [Unlicense](https://unlicense.org/) and comes with __absolutely no warranty__. The author assumes no responsibility of data loss or any other unintended side-effects.
+This source code is distributed under [Unlicense](https://unlicense.org/) and comes with __absolutely no warranty__. The author assumes no responsibility for data loss or any other unintended side-effects.
 
 ## Author
 
@@ -25,6 +27,7 @@ __Teemu Tammela__
 * [Contentful Setup](#contentful-gems-setup)
 * [Dynamic Pages Setup](#dynamic-pages-setup)
 * [Deploy to Netlify](#deploy-to-netlify)
+* [Webhook Setup](#webhook-setup)
 
 ## Requirements
 
@@ -277,6 +280,14 @@ __3)__ Log into [Netflify](https://www.netlify.com/). Sign up to a new account i
 
 __4)__ Select _New site from Git_ under _Sites_ on the Netlify dashboard. Select your preferred Git service provider under _Continuous Development_ and insert your credentials.
 
-__5)__ Set `middleman build` as the _Build command_ and `build/` as the _Publish directory_. You can configure Netlify to use any branch in your repository as the build source. By default, Netlify launches a new build whenever new commits are pushed to the `master` branch.
+__5)__ Set `middleman build` as the _Build command_ and `build/` as the _Publish directory_. You can configure Netlify to use any branch in your repository as the build source. By default, Netlify launches a new build whenever new commits are pushed to the `main` branch.
 
 __6)__ Set Contentful Delivery API key and Space ID as environmental variables `CONTENTFUL_DELIVERY_API_KEY` and `CONTENTFUL_SPACE_ID` at _Site settings_ → _Build & deploy_ → _Environment_ → _Edit variables_.
+
+## Webhook Setup
+
+__1)__ On Netlify go to _Site settings_ → _Build & deploy_ → _Build hooks_ → _Add build hook_ and create a new build hook. Name the new build hook as _Contentful_. By default, _Branch to build_ is set to `main`. Your new build hook URL should look like this.
+
+`https://api.netlify.com/build_hooks/<WEBHOOK_ID>`
+
+__2)__ On Contentful go to _Settings_ → _Webhooks_ and select _Netlify - Deploy a site_ from the _Webhook templates_ list. Insert the URL to _Netlify build hook URL_ field and select _Create webhook_. By default the webhook is set to trigger whenever entries are published or unpublished. You can change this behavior from _Webhook settings_. 
