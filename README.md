@@ -83,7 +83,7 @@ __1)__ Install the [Middleman](https://middlemanapp.com/) gem.
 $ gem install middleman
 ```
 
-__2)__ Create a project directory and set up default Middleman installation.
+__2)__ Create a project directory and set up the default Middleman installation.
 
 ```shell
 $ mkdir my_project_dir
@@ -113,7 +113,7 @@ __4)__ Finish the installation by executing Bundler once again.
 $ bundle install
 ```
 
-__5)__ Start the Middleman server. You should now see Middleman's default page at [http://localhost:4567](http://localhost:4567). By default Middleman runs in port `4567`. Change the default parameter using the `-p` parameter (e.g. `middleman server -p 9292`).
+__5)__ Start the Middleman server. You should now see Middleman's default page at [http://localhost:4567](http://localhost:4567). By default Middleman runs at port `4567`. Change the default parameter using the `-p` parameter (e.g. `middleman server -p 9292`).
 
 ```shell
 $ middleman server
@@ -132,7 +132,7 @@ __1)__ Add `.evn` to `.gitignore` file. It should look like this.
 build/
 ```
 
-__2)__ Create a copy of the `.env.example` file and add the Delivery API key and Space ID. See Contentful's [authentication documentation](https://www.contentful.com/developers/docs/references/authentication/) for instructions how to set up API keys.
+__2)__ Create a copy of the `.env.example` file and insert the Delivery API key and Space ID. See Contentful's [authentication documentation](https://www.contentful.com/developers/docs/references/authentication/) for instructions how to set up API keys.
 
 
 ```shell
