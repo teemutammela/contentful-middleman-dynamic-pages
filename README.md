@@ -1,12 +1,16 @@
 # Dynamic Pages with Contentful and Middleman
 
-This tutorial describes how to create dynamic pages with the [Contentful](https://www.contentful.com/) content management platform and the [Middleman](https://middlemanapp.com/) static site generator. Prior methods of combining Contentful and Middleman, such as the [contentful_middleman](https://github.com/contentful/contentful_middleman) gem, involved exporting Contentful entries as a JSON file. The dynamic page approach, however, streamlines the development by querying content in real time via the Contentful Delivery API without the need for exporting files.
+Guide for creating dynamic pages with the [Contentful](https://www.contentful.com/) content management platform and the [Middleman](https://middlemanapp.com/) static site generator. Prior methods of combining Contentful and Middleman, such as the [contentful_middleman](https://github.com/contentful/contentful_middleman) gem, involved exporting Contentful entries as a JSON file. The dynamic page approach, however, streamlines the development by querying content in real time via the Contentful Delivery API without the need for exporting files.
 
 In addition, this tutorial describes how to deploy the application to [Netlify](https://www.netlify.com/) and how to setup a Contentful webhook to rebuild the site whenever entries are published. This tutorial is written with Unix-like operating systems such as macOS or Linux in mind.
 
 __NOTE!__ The source code found in this repository is the __end result__ of this tutorial. Both cloning the repository _and_ carrying out the tutorial is not necessary.
 
-This source code is distributed under [Unlicense](https://unlicense.org/) and comes with __absolutely no warranty__. The author assumes no responsibility for data loss or any other unintended side-effects.
+## Contentful
+
+[Contentful](https://www.contentful.com/) provides a content infrastructure for digital teams to power content in websites, apps, and devices. Unlike a CMS, Contentful was built to integrate with the modern software stack. It offers a central hub for structured content, powerful management and delivery APIs, and a customizable web app that enable developers and content creators to ship digital products faster.
+
+Contentful is registered trademark of Contentful GmbH.
 
 ## Author
 
@@ -17,6 +21,10 @@ __Teemu Tammela__
 * [github.com/teemutammela](https://github.com/teemutammela)
 * [www.linkedin.com/in/teemutammela](https://www.linkedin.com/in/teemutammela/)
 * [t.me/teemutammela](http://t.me/teemutammela)
+
+## Disclaimer
+
+This source code is distributed under [Unlicense](https://unlicense.org/) and comes with __absolutely no warranty__. The author assumes no responsibility for data loss or any other unintended side-effects.
 
 ## Table of Contents
 
