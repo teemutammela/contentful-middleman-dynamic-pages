@@ -4,9 +4,7 @@ Guide for creating dynamic pages with the [Contentful](https://www.contentful.co
 
 In addition, this tutorial describes how to deploy the application to [Netlify](https://www.netlify.com/) and how to setup a Contentful webhook to rebuild the site whenever entries are published. This tutorial is written with Unix-like operating systems such as macOS or Linux in mind.
 
-__NOTE!__ The source code found in this repository is the __end result__ of this tutorial. Both cloning the repository _and_ carrying out the tutorial is not necessary.
-
-__NOTE!__ Please bear in mind that this example is boilerplate code and not by any means a comprehensive guide to Middleman and Contentful.
+__NOTE!__ The source code found in this repository is the __end result__ of this tutorial. Both cloning the repository _and_ carrying out the tutorial is not necessary. Furthermore, this example is boilerplate code and not by any means a comprehensive guide to Middleman and Contentful.
 
 ## Contentful
 
