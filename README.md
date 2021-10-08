@@ -6,6 +6,8 @@ In addition, this tutorial describes how to deploy the application to [Netlify](
 
 __NOTE!__ The source code found in this repository is the __end result__ of this tutorial. Both cloning the repository _and_ carrying out the tutorial is not necessary.
 
+__NOTE!__ Please bear in mind that this example is boilerplate code and not by any means a comprehensive guide to Middleman and Contentful.
+
 ## Contentful
 
 [Contentful](https://www.contentful.com/) provides a content infrastructure for digital teams to power content in websites, apps, and devices. Unlike a CMS, Contentful was built to integrate with the modern software stack. It offers a central hub for structured content, powerful management and delivery APIs, and a customizable web app that enable developers and content creators to ship digital products faster.
