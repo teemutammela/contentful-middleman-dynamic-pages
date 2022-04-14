@@ -40,7 +40,7 @@ This source code is distributed under [Unlicense](https://unlicense.org/) and co
 ## Requirements
 
 * [Contentful CLI](https://github.com/contentful/contentful-cli)
-* [Ruby](https://www.ruby-lang.org/en/) (3.0.2)
+* [Ruby](https://www.ruby-lang.org/en/) (3.1.2)
 * [RVM](https://rvm.io/)
 * [Bundler](https://bundler.io/)
 * [Git](https://git-scm.com/) (optional)
@@ -64,14 +64,14 @@ $ contentful space import --content-file setup/example_content.json
 
 ## Ruby & RVM Setup
 
-__1)__ It's highly recommended to have [RVM](https://rvm.io/) (Ruby Version Manager) installed. RVM makes installing and managing various Ruby versions a breeze. Once you have RVM installed, install Ruby `3.0.2` and set it as the default version in your project directory.
+__1)__ It's highly recommended to have [RVM](https://rvm.io/) (Ruby Version Manager) installed. RVM makes installing and managing various Ruby versions a breeze. Once you have RVM installed, install Ruby `3.1.2` and set it as the default version in your project directory.
 
 ```shell
-$ rvm install 3.0.2
-$ rvm use 3.0.2 --default
+$ rvm install 3.1.2
+$ rvm use 3.1.2 --default
 ```
 
-__2)__ Make sure you have the Ruby version `3.0.2` installed and set as the active Ruby version.
+__2)__ Make sure you have the Ruby version `3.1.2` installed and set as the active Ruby version.
 
 ```shell
 $ ruby -v
@@ -102,17 +102,20 @@ $ middleman init
 __3)__ Modify the `Gemfile` by adding the Ruby version as well as the `contentful` and `rich_text_renderer` gems. Using exact gem version numbers is not absolutely necessary, simply a precaution to ensure this tutorial works as intended.
 
 ```
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-ruby "3.0.2"
+source 'https://rubygems.org'
 
-gem "middleman", "4.4.0"
-gem "middleman-autoprefixer", "3.0.0"
-gem "contentful", "2.16.1"
-gem "rich_text_renderer", "0.2.2"
-gem "redcarpet", "3.5.1"
-gem "tzinfo-data", platforms: [:mswin, :mingw, :jruby, :x64_mingw]
-gem "wdm", "~> 0.1", platforms: [:mswin, :mingw, :x64_mingw]
+ruby '3.1.2'
+
+gem 'contentful', '2.16.3'
+gem 'middleman', '4.4.2'
+gem 'middleman-autoprefixer', '3.0.0'
+gem 'redcarpet', '3.5.1'
+gem 'rich_text_renderer', '0.3.0'
+gem 'rubocop', '1.27.0'
+gem 'tzinfo-data', platforms: %i[mswin mingw jruby x64_mingw]
+gem 'wdm', '~> 0.1', platforms: %i[mswin mingw x64_mingw]
 ```
 
 __4)__ Finish the installation by executing Bundler once again.
@@ -155,18 +158,18 @@ CONTENTFUL_SPACE_ID=xyz123
 __3)__ Add Contentful Delivery API client, Rich Text renderer and [Redcarpet](https://github.com/vmg/redcarpet) gems to `config.rb`. Redcarpet is a library for converting Markdown into HTML.
 
 ```ruby
-require "contentful"
-require "rich_text_renderer"
-require "redcarpet"
-require "redcarpet/render_strip"
+require 'contentful'
+require 'rich_text_renderer'
+require 'redcarpet'
+require 'redcarpet/render_strip'
 ```
 
 __4)__ Add the Contentful Delivery API client to `config.rb`. Delivery API key and Space ID will be loaded from `.env` file.
 
 ```ruby
 client = Contentful::Client.new(
-  access_token: ENV["CONTENTFUL_DELIVERY_API_KEY"],
-  space:        ENV["CONTENTFUL_SPACE_ID"]
+  access_token: ENV['CONTENTFUL_DELIVERY_API_KEY'],
+  space: ENV['CONTENTFUL_SPACE_ID']
 )
 ```
 
@@ -174,29 +177,23 @@ __5)__ Add a custom helpers to `config.rb`. These helpers are used for convertin
 
 ```ruby
 helpers do
-
   # Custom helper for converting Rich Text to HTML
   def rich_text_to_html(value)
-
     renderer = RichTextRenderer::Renderer.new
     renderer.render(value)
-
   end
 
   # Custom helper for convert Markdown to HTML
   def markdown_to_html(value)
-
     renderer = Redcarpet::Markdown.new(
-    	Redcarpet::Render::HTML,
-    	autolink:     false,
-    	tables:       true,
-    	escape_html:  false
+      Redcarpet::Render::HTML,
+      autolink: false,
+      tables: true,
+      escape_html: false
     )
 
     renderer.render(value)
-
   end
-
 end
 ```
 
@@ -228,13 +225,13 @@ __3)__ Add the following code block to `config.rb`. Query the `Slug` field of ev
 
 ```ruby
 # Query entries that match the content type 'Page'.
-# Parameter 'include' is set to 0, since we don't need related entries.
-# Parameter 'limit' value set as 10 for development, 1000 for build.
+# Parameter `include` is set to 0, since we don't need related entries.
+# Parameter `limit` value set as 10 for development, 1000 for build.
 pages = client.entries(
-  content_type: "page",
-  include:      0,
-  select:       "fields.slug",
-  limit:        build? ? 1000 : 10
+  content_type: 'page',
+  include: 0,
+  select: 'fields.slug',
+  limit: build? ? 1000 : 10
 )
 
 # Map the 'Slug' field values of 'Page' entries into a flat array.
@@ -242,28 +239,26 @@ page_slugs = pages.map do |page|
   page.fields[:slug]
 end
 
-# Query 'Page' entries and set corresponding proxies.
+# Query 'Pages' entry and set corresponding proxy.
 page_slugs.each do |page_slug|
-
   # Query 'Page' entry by 'Slug' field value.
   page = client.entries(
-    content_type:   "page",
-    include:        2,
-    "fields.slug":  page_slug
+    content_type: 'page',
+    include: 2,
+    "fields.slug": page_slug
   ).first
 
   # Set proxy for 'Slug' field value and pass 'Page' entry's data to template.
-  proxy "/pages/#{page_slug}/index.html", "/pages/page.html", locals: {
-    page: page
+  proxy "/pages/#{page_slug}/index.html", '/pages/page.html', locals: {
+    page:
   }
-
 end
 ```
 
 __4)__ Add an ignore command to `config.rb`. This will prevent Middleman from trying to build the `Page` template into a HTML page. We're already creating paths for the HTML pages via the proxy.
 
 ```ruby
-ignore "/pages/page.html"
+ignore '/pages/page.html'
 ```
 
 __5)__ Test the proxy at [http://localhost:4567/pages/example-page-1](http://localhost:4567/pages/example-page-1).
@@ -279,7 +274,7 @@ $ middleman build
 __1)__ Create a `.ruby-version` file.
 
 ```shell
-$ echo "ruby-3.0.2" > .ruby-version
+$ echo "ruby-3.1.2" > .ruby-version
 ```
 
 __2)__ Push your Middleman app into a [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/) or [Bitbucket](https://bitbucket.org/) repository.
