@@ -173,7 +173,7 @@ client = Contentful::Client.new(
 )
 ```
 
-__5)__ Add a custom helpers to `config.rb`. These helpers are used for converting Rich Text and Markdown into HTML. This example uses the Rich Text renderer library's default settings. See Rich Text renderer [documentation](https://github.com/contentful/rich-text-renderer.rb) for more details how to create custom renderers for various embedded entry types, or see Redcarpet's [documentation](https://github.com/vmg/redcarpet) for more details about rendering options.
+__5)__ Add custom helpers to `config.rb`. These helpers are used for converting Rich Text and Markdown into HTML. This example uses the Rich Text renderer library's default settings. See Rich Text renderer [documentation](https://github.com/contentful/rich-text-renderer.rb) for more details how to create custom renderers for various embedded entry types, or see Redcarpet's [documentation](https://github.com/vmg/redcarpet) for more details about rendering options.
 
 ```ruby
 helpers do
@@ -293,4 +293,4 @@ __1)__ On Netlify go to _Site settings_ → _Build & deploy_ → _Build hooks_ �
 
 `https://api.netlify.com/build_hooks/<WEBHOOK_ID>`
 
-__2)__ On Contentful go to _Settings_ → _Webhooks_ and select _Netlify - Deploy a site_ from the _Webhook templates_ list. Insert the URL to _Netlify build hook URL_ field and select _Create webhook_. By default the webhook is set to trigger whenever entries are published or unpublished. You can change this behavior from _Webhook settings_. 
+__2)__ On Contentful go to _Settings_ → _Webhooks_ and select _Netlify - Deploy a site_ from the _Webhook templates_ list. Insert the URL to _Netlify build hook URL_ field and select _Create webhook_. By default the webhook is set to trigger whenever entries are published or unpublished. You can change this behavior from _Webhook settings_.
