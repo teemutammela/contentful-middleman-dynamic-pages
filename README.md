@@ -296,7 +296,9 @@ __4)__ Select _Sites_ → _Import an existing project_ on the Netlify dashboard.
 
 __5)__ Set `middleman build` as the _Build command_ and `build/` as the _Publish directory_. You can configure Netlify to use any branch in your repository as the build source. By default, Netlify launches a new build whenever new commits are pushed to the `main` branch.
 
-__6)__ Set Contentful Delivery API key and Space ID as environmental variables `CONTENTFUL_DELIVERY_API_KEY` and `CONTENTFUL_SPACE_ID` at _Site settings_ → _Build & deploy_ → _Environment_ → _Edit variables_.
+__6)__
+
+Go to _Site settings_ → _Build & deploy_ → _Environment_ → _Edit variables_ and set Contentful Delivery API key and Space ID as environmental variables `CONTENTFUL_DELIVERY_API_KEY` and `CONTENTFUL_SPACE_ID`.
 
 ## Webhook Setup
 
