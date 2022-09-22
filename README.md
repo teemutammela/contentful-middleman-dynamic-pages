@@ -99,9 +99,15 @@ $ cd my_project_dir/
 $ middleman init
 ```
 
+__NOTE!__ If you encounter an error while `middleman init` or `middleman server`, you may have to create `Gemfile` in advance and/or define strict version number for the `haml` gem.
+
+```ruby
+gem 'haml', '~> 5.0'
+```
+
 __3)__ Modify the `Gemfile` by adding the Ruby version as well as the `contentful` and `rich_text_renderer` gems. Using exact gem version numbers is not absolutely necessary, simply a precaution to ensure this tutorial works as intended.
 
-```
+```ruby
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
@@ -144,7 +150,6 @@ build/
 ```
 
 __2)__ Create a copy of the `.env.example` file and insert the Delivery API key and Space ID. See Contentful's [authentication documentation](https://www.contentful.com/developers/docs/references/authentication/) for instructions how to set up API keys.
-
 
 ```shell
 $ cp .env.example .env
@@ -208,17 +213,23 @@ $ touch source/pages/page.html.erb
 
 __2)__ Insert the following lines of code to `source/pages/page.html.erb`. Notice how we are displaying values from both the `fields` and `sys` properties of the entry. On the last two lines we are using our custom helpers to convert Markdown and Rich Text into HTML.
 
-```html
+```erb
 ---
 title: Example Page
 ---
 <h1><%= page.fields[:title] %></h1>
-
 <p><%= page.sys[:updated_at] %></p>
-
 <p><%= markdown_to_html(page.fields[:lead]) %></p>
-
 <p><%= rich_text_to_html(page.fields[:body]) %></p>
+```
+
+Mixing raw HTML tags and Ruby syntax doesn’t yield the cleanest template code, so alternatively you can take advantage of [Padrino's tag helpers](https://padrinorb.com/guides/application-helpers/tag-helpers/).
+
+```erb
+<%= content_tag :h1, page.fields[:title] %>
+<%= content_tag :p, page.sys[:updated_at] %>
+<%= content_tag :p, markdown_to_html(page.fields[:lead]) %>
+<%= content_tag :p, rich_text_to_html(page.fields[:body]) %>
 ```
 
 __3)__ Add the following code block to `config.rb`. Query the `Slug` field of every `Page` entry, map the `Slug` field values into a flat array, query the corresponding `Page` entry and set a proxy. See Middleman's [dynamic pages](https://middlemanapp.com/advanced/dynamic-pages/) documentation for more details about proxies.
@@ -281,7 +292,7 @@ __2)__ Push your Middleman app into a [GitHub](https://github.com/), [GitLab](ht
 
 __3)__ Log into [Netflify](https://www.netlify.com/). Sign up to a new account if you don't already have one.
 
-__4)__ Select _New site from Git_ under _Sites_ on the Netlify dashboard. Select your preferred Git service provider under _Continuous Development_ and insert your credentials.
+__4)__ Select _Sites_ → _Import an existing project_ on the Netlify dashboard. Select your preferred Git service provider under _Connect to Git provider_ and insert your credentials.
 
 __5)__ Set `middleman build` as the _Build command_ and `build/` as the _Publish directory_. You can configure Netlify to use any branch in your repository as the build source. By default, Netlify launches a new build whenever new commits are pushed to the `main` branch.
 
