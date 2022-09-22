@@ -99,7 +99,7 @@ $ cd my_project_dir/
 $ middleman init
 ```
 
-__NOTE!__ If you encounter an error while `middleman init` or `middleman server`, you may have to create `Gemfile` in advance and/or define strict version number for the `haml` gem.
+__NOTE!__ If you encounter an error while executing `middleman init` or `middleman server`, you may have to create `Gemfile` in advance and/or define strict version number for the `haml` gem.
 
 ```ruby
 gem 'haml', '~> 5.0'
